@@ -1,0 +1,88 @@
+﻿@model OnlineShop.Models.RegisterModel
+
+@{
+    ViewBag.Title = "Register";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+<div class="content">
+
+
+    <link href="//maxcdn.bootstrapcdn.com/bootstrap/3.3.0/css/bootstrap.min.css" rel="stylesheet" id="bootstrap-css">
+    <script src="//maxcdn.bootstrapcdn.com/bootstrap/3.3.0/js/bootstrap.min.js"></script>
+    <script src="//code.jquery.com/jquery-1.11.1.min.js"></script>
+    <div class="container">
+        <div class="row">
+            <div class="col-md-8 col-md-offset-2">
+           
+
+                @using (Html.BeginForm("Register","User",FormMethod.Post))
+                {
+                    @Html.AntiForgeryToken()
+
+                    <legend class="text-center">Register</legend>
+                    <fieldset>
+                        <legend>Account Details</legend>
+                        <div class="form-group">
+                            @Html.ValidationSummary(true,"", new { @class="text-danger"})
+                            @if (ViewBag.Success!= null)
+                            {
+                                <div class="alert alert-success">@ViewBag.Success</div>
+                            }
+
+                        </div>
+                        <div class="form-group col-md-6">
+                            <label>@Html.LabelFor(model => model.UserName, htmlAttributes: new { @class = "control-label" })</label>
+                                @Html.TextBoxFor(model => model.UserName, new { @class = "form-control" })
+                                @Html.ValidationMessageFor(model => model.UserName, "", new { @class = "text-danger" })
+                        </div>
+                        <div class="form-group col-md-6">
+                            <label> @Html.LabelFor(model => model.Phone, htmlAttributes: new { @class = "control-label" })</label>
+                                @Html.TextBoxFor(model => model.Phone, new { @class = "form-control" })
+                                @Html.ValidationMessageFor(model => model.Phone, "", new { @class = "text-danger" })
+                        </div>
+                        <div class="form-group col-md-12">
+                            <label> @Html.LabelFor(model => model.Email, htmlAttributes: new { @class = "control-label" })</label>
+                                @Html.TextBoxFor(model => model.Email, new { @class = "form-control"  })
+                                @Html.ValidationMessageFor(model => model.Email, "", new { @class = "text-danger" })
+                        </div>
+                        <div class="form-group col-md-6">
+                            <label> @Html.LabelFor(model => model.Password, htmlAttributes: new { @class = "control-label" })</label>
+                                @Html.PasswordFor(model => model.Password, new { @class = "form-control" })
+                                @Html.ValidationMessageFor(model => model.Password, "", new { @class = "text-danger" })
+                        </div>
+                        <div class="form-group col-md-6">
+                            <label>  @Html.LabelFor(model => model.ConfirmPassword, htmlAttributes: new { @class = "control-label" })</label>
+                                @Html.PasswordFor(model => model.ConfirmPassword, new { @class = "form-control" })
+                                @Html.ValidationMessageFor(model => model.ConfirmPassword, "", new { @class = "text-danger" })
+                        </div>
+                    </fieldset>
+                    <fieldset>
+                        <div class="form-group col-md-12">
+                            <label>@Html.LabelFor(model => model.Address, htmlAttributes: new { @class = "control-label" })</label>
+                            <div>
+                                @Html.TextAreaFor(model => model.Address, new { @class = "form-control" })
+                                @Html.ValidationMessageFor(model => model.Address, "", new { @class = "text-danger" })
+                            </div>
+                        </div>
+                    </fieldset>
+                    <div class="form-group col-md-6">
+
+                        <label> @Html.LabelFor(model => model.Name, htmlAttributes: new { @class = "control-label" })</label>
+                            @Html.TextBoxFor(model => model.Name, new { @class = "form-control" })
+                            @Html.ValidationMessageFor(model => model.Name, "", new { @class = "text-danger" })
+                       
+                    </div>
+                    <div class="form-group col-md-6">
+                        <div>
+                            <input type="submit" value="Register" class="btn btn-lg btn-info"/>
+                        
+                            <a href="#">Already have an account?</a>
+                        </div>
+                    </div>
+                }
+            </div>
+        </div>
+    </div>
+</div>
+
+

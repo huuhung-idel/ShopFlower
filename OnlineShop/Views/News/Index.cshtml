@@ -1,0 +1,35 @@
+﻿@model List<Model.EF.News>
+@{
+    ViewBag.Title = "Index";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+<div class="main">
+    <div class="content">
+        @foreach (var item in Model)
+        {
+            <div class="image group">
+                <div class="grid images_3_of_1">
+                   <img src=" @item.Image"/>
+                </div>
+                <div class="grid news_desc">
+                    <h3>@item.Name </h3>
+                    <h4>@item.CreateDate by <span><a href="#">@item.CreateBy</a></span></h4>
+                    <p>@item.Description
+                    <a href="#" title="more">[....]</a></p>
+                </div>
+            </div>
+
+        }
+
+        <div class="content-pagenation">
+            <li><a href="#">Frist</a></li>
+            <li class="active"><a href="#">1</a></li>
+            <li><a href="#">2</a></li>
+            <li><a href="#">3</a></li>
+            <li><span>....</span></li>
+            <li><a href="#">Last</a></li>
+            <div class="clear"> </div>
+        </div>
+    </div>
+</div>
+

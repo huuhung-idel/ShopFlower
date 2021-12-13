@@ -1,0 +1,109 @@
+﻿@model List<OnlineShop.Models.Cartitem>
+@{
+    ViewBag.Title = "Payment";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+@section jsFooter{
+    <script src="~/Assets/client/js/controller/cartController.js"></script>
+}
+<link href="//netdna.bootstrapcdn.com/bootstrap/3.2.0/css/bootstrap.min.css" rel="stylesheet" id="bootstrap-css">
+<script src="//netdna.bootstrapcdn.com/bootstrap/3.2.0/js/bootstrap.min.js"></script>
+<script src="//code.jquery.com/jquery-1.11.1.min.js"></script>
+<!------ Include the above in your HEAD tag ---------->
+<link href="//maxcdn.bootstrapcdn.com/font-awesome/4.1.0/css/font-awesome.min.css" rel="stylesheet">
+<div class="content">
+    @if (Model.Count > 0)
+    {
+        <table id="cart" class="table table-hover table-condensed">
+            <thead>
+                <tr>
+                    <th style="width:50%">Product</th>
+                    <th style="width:10%">Price</th>
+                    <th style="width:8%">Quantity</th>
+                    <th style="width:22%" class="text-center">Subtotal</th>
+                    <th style="width:10%"></th>
+                    <th></th>
+                </tr>
+            </thead>
+            <tbody>
+                @foreach (var item in Model)
+                {
+                    <tr>
+                        <td data-th="Product">
+                            <div class="row">
+                                <div class="col-sm-2 hidden-xs"><img src="@item.Product.Image" width="100" class="img-responsive" /></div>
+                                <div class="col-sm-10">
+                                    <h4 class="nomargin">@item.Product.Name</h4>
+                                    <p>@item.Product.Descriptions</p>
+                                </div>
+                            </div>
+                        </td>
+                        <td data-th="Price">@(item.Product.Price.GetValueOrDefault(0).ToString("N0"))</td>
+                        <td data-th="Quantity">
+                            <input type="text" class="txtQuantity" data-id="@item.Product.ID" value="@item.Quantity" />
+                        </td>
+                        <td data-th="Subtotal" class="text-center">@((item.Product.Price.GetValueOrDefault(0) * item.Quantity).ToString("N0"))</td>
+                        <td class="actions" data-th="">
+                            <a href="#" data-id="@item.Product.ID" class="btn-delete"><i class="fa fa-trash-o"></i></a>
+                        </td>
+                    </tr>
+                }
+            </tbody>
+            <tbody>
+
+                <tr>
+                    <td>
+                        <button id="btnContinue" class="btn btn-success"><i class="fa fa-angle-left"></i> Continue Shopping</button>
+                    </td>
+                    <td colspan="2" class="hidden-xs"></td>
+                    <td class="hidden-xs text-center"><strong>Total $1.99</strong></td>
+                    <td></td>
+                </tr>
+            </tbody>
+
+        </table>
+    }
+</div>
+<hr />
+
+<div class="selection group">
+    <div class="col span_2_of_3">
+        <div class="contact-form">
+            <h2>Payment</h2>
+            @using (Html.BeginForm("Payment", "Cart", FormMethod.Post))
+            {
+
+                <div class="form-group">
+                    <span><label>Name</label></span>
+                    <span><input type="text" name="shipName" class="form-control"></span>
+                </div>
+                <div class="form-group">
+                    <span><label>Phone</label></span>
+                    <span><input type="text" name="phone" class="form-control"></span>
+                </div>
+                <div class="form-group">
+                    <span><label>Address</label></span>
+                    <span><input type="text" name="address" class="form-control"></span>
+                </div>
+                <div class="form-group">
+                    <span><label>Email</label></span>
+                    <span><input type="text" name="email" class="form-control"></span>
+                </div>
+
+                <div class="form-group">
+                    <button type="submit" class="btn btn-danger">Submit</button>
+                </div>
+
+            }
+        </div>
+    </div>
+</div>
+
+
+
+
+
+
+
+

@@ -1,0 +1,143 @@
+﻿@model List<OnlineShop.Models.Cartitem>
+@{
+    ViewBag.Title = "Index";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+@section jsFooter{
+    <script src="~/Assets/client/js/controller/cartController.js"></script>
+}
+
+<link href="//netdna.bootstrapcdn.com/bootstrap/3.2.0/css/bootstrap.min.css" rel="stylesheet" id="bootstrap-css">
+<script src="//netdna.bootstrapcdn.com/bootstrap/3.2.0/js/bootstrap.min.js"></script>
+<script src="//code.jquery.com/jquery-1.11.1.min.js"></script>
+<!------ Include the above in your HEAD tag ---------->
+<link href="//maxcdn.bootstrapcdn.com/font-awesome/4.1.0/css/font-awesome.min.css" rel="stylesheet">
+<div class="content">
+    @if (Model.Count > 0)
+    {
+        <table id="cart" class="table table-hover table-condensed">
+            <thead>
+                <tr>
+                    <th style="width:50%">Product</th>
+                    <th style="width:10%">Price</th>
+                    <th style="width:8%">Quantity</th>
+                    <th style="width:22%" class="text-center">Subtotal</th>
+                    <th style="width:10%"></th>
+                    <th></th>
+                </tr>
+            </thead>
+            <tbody>
+                @foreach (var item in Model)
+                {
+                    <tr>
+                        <td data-th="Product">
+                            <div class="row">
+                                <div class="col-sm-2 hidden-xs"><img src="@item.Product.Image" width="100" class="img-responsive" /></div>
+                                <div class="col-sm-10">
+                                    <h4 class="nomargin">@item.Product.Name</h4>
+                                    <p>@item.Product.Descriptions</p>
+                                </div>
+                            </div>
+                        </td>
+                        <td data-th="Price">@(item.Product.Price.GetValueOrDefault(0).ToString("N0"))</td>
+                        <td data-th="Quantity">
+                            <input type="text" class="txtQuantity" data-id="@item.Product.ID" value="@item.Quantity" />
+                        </td>
+                        <td data-th="Subtotal" class="text-center">@((item.Product.Price.GetValueOrDefault(0) * item.Quantity).ToString("N0"))</td>
+                        <td class="actions" data-th="">
+                            <a href="#" data-id="@item.Product.ID" class="btn-delete"><i class="fa fa-trash-o"></i></a>
+                        </td>
+                    </tr>
+                }
+            </tbody>
+            <tbody>
+             
+                <tr>
+                    <td>
+                        <button id="btnContinue" class="btn btn-success"><i class="fa fa-angle-left"></i> Continue Shopping</button>
+                    </td>
+                    <td colspan="2" class="hidden-xs"></td>
+                    <td class="hidden-xs text-center"><strong>Total $1.99</strong></td>
+                    <td></td>
+                </tr>
+            </tbody>
+            <tfoot>
+                <tr>
+                    <td colspan="2" class="hidden-xs"></td>
+                    <td colspan="3">
+                        <button id="btnUpdate" class="btn btn-success">Cập nhật giỏ hàng</button>
+                        <button id="btnDeleteAll" class="btn btn-success">Xóa giỏ hàng</button>
+                        <button id="btnPayment" class="btn btn-success">Thanh toán <i class="fa fa-angle-right"></i></button>
+                    </td>
+                </tr>
+            </tfoot>
+        </table>
+    }
+    else
+    {
+        <span class="alert alert-danger"> No product...</span>
+    }
+
+</div>
+
+@*<div class="content">
+
+
+        <div class="section group">
+
+            @if (Model.Count > 0)
+            {
+
+                <div class="card-body">
+                    <div class="table-responsive">
+                        <table class="table table-responsive " id="dataTable" width="100%" cellspacing="0">
+                            <thead>
+                                <tr>
+                                    <td style="margin-right:150px">Code</td>
+                                    <td>NAME</td>
+                                    <td>IMAGE</td>
+                                    <td> AMOUNT</td>
+                                    <td>UNIT PRICE</td>
+                                    <td>INTO MONEY</td>
+                                    <td></td>
+                                </tr>
+                            </thead>
+
+                            <tbody>
+
+                                @foreach (var item in Model)
+                                {
+                                    <tr>
+                                        <td>@item.Product.Code</td>
+                                        <td>@item.Product.Name</td>
+                                        <td><img src="@item.Product.Image" width="100" /></td>
+                                        <td><input type="text" class="txtQuantity" data-id="@item.Product.ID" value="@item.Quantity" /></td>
+                                        <td>@item.Product.Price.GetValueOrDefault(0)</td>
+                                        <td>@(item.Product.Price.GetValueOrDefault(0) * item.Quantity)</td>
+                                        <td><a href="#" data-id="@item.Product.ID" class="btn-delete">Delete</a></td>
+                                    </tr>
+                                }
+
+                            </tbody>
+                        </table>
+                        <button id="btnContinue" class="btn btn-success">Tiếp tục mua hàng</button>
+                        <button id="btnUpdate" class="btn btn-success">Cập nhật giỏ hàng</button>
+                        <button id="btnDeleteAll" class="btn btn-success">Xóa giỏ hàng</button>
+                        <button id="btnPayment" class="btn btn-success">Thanh toán</button>
+                    </div>
+                </div>
+
+            }
+            else
+            {
+
+                <span class="alert alert-danger"> No product...</span>
+            }
+        </div>
+    </div>*@
+
+
+
+
+

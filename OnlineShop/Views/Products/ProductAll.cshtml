@@ -1,0 +1,46 @@
+﻿
+@{
+    ViewBag.Title = "ProductAll";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+    var listProductAll = (List<Model.EF.Product>)ViewBag.productAll;
+}
+<div class="content">
+    <div class="section-group">
+        <div class="content_bottom">
+            <div class="heading">
+                <h3>ALL PRODUCTS</h3>
+            </div>
+
+            <div class="clear"></div>
+        </div>
+
+        <div class="section group">
+
+            @foreach (var item in listProductAll)
+            {
+                var url = "/chi-tiet/" + item.MetaTitle + "-" + item.ID;
+                <div>
+
+                    <div class="grid_1_of_4 images_1_of_4">
+                        <a href="@url"><img src="@item.Image" alt="@item.Name" /></a>
+                        <h2>@(OnlineShop.Controllers.HomeController.getString(item.Name)) </h2>
+                        <div class="price-details">
+                            <div class="price-number">
+                                <p><span class="rupees">@(item.Price.HasValue ? item.Price.Value.ToString("N0") : "Liên hệ") VND</span></p>
+                            </div>
+                            <div class="add-cart">
+                                <h4><a href="/them-gio-hang?productId= @item.ID&quantity=1">Add to Cart</a></h4>
+                            </div>
+                            <div class="clear"></div>
+                        </div>
+
+                    </div>
+                </div>
+            }
+
+        </div>
+
+
+    </div>
+
+</div>
